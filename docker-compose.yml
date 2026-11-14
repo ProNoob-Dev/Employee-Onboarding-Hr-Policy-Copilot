@@ -1,0 +1,25 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # POSTGRES_PASSWORD comes from a gitignored .env file; compose fails
+      # fast if it is missing instead of starting with a guessable password.
+      DATABASE_URL: postgresql://hr:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set in .env}@postgres:5432/hr_copilot
+      AUDIT_LOG_PATH: /app/audit.log
+    depends_on:
+      - postgres
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: hr
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD must be set in .env}
+      POSTGRES_DB: hr_copilot
+    # No host port published: Postgres is reachable only inside the compose
+    # network. Publish 127.0.0.1:5432:5432 only if local access is needed.
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

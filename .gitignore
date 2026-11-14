@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+audit.log
+eval/last_run.json
+.DS_Store
+.taste-skill/chrome-*
+.taste-skill/

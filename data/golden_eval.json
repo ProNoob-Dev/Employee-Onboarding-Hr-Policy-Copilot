@@ -1,0 +1,156 @@
+[
+ {
+  "category": "leave",
+  "expected_doc_id": "LEAVE",
+  "expected_route": "answered",
+  "id": "Q01",
+  "question": "How many days of annual leave do I get each year?"
+ },
+ {
+  "category": "benefits",
+  "expected_doc_id": "BEN-HEALTH",
+  "expected_route": "answered",
+  "id": "Q02",
+  "question": "What does the health insurance cover for my family?"
+ },
+ {
+  "category": "expenses",
+  "expected_doc_id": "EXP-REIMB",
+  "expected_route": "answered",
+  "id": "Q03",
+  "question": "How do I claim reimbursement for my travel expenses?"
+ },
+ {
+  "category": "onboarding",
+  "expected_doc_id": "ONB",
+  "expected_route": "answered",
+  "id": "Q04",
+  "question": "What paperwork do I need to complete on my first day of joining?"
+ },
+ {
+  "category": "remote",
+  "expected_doc_id": "REMOTE",
+  "expected_route": "answered",
+  "id": "Q05",
+  "question": "Can I work from home, and how many days a week?"
+ },
+ {
+  "category": "conduct",
+  "expected_doc_id": "CONDUCT",
+  "expected_route": "answered",
+  "id": "Q06",
+  "question": "What is the code of conduct for employees?"
+ },
+ {
+  "category": "it",
+  "expected_doc_id": "IT",
+  "expected_route": "answered",
+  "id": "Q07",
+  "question": "How do I request a new laptop?"
+ },
+ {
+  "category": "leave",
+  "expected_doc_id": "LEAVE-CARRY",
+  "expected_route": "answered",
+  "id": "Q08",
+  "question": "Can I carry forward my unused leave to next year?"
+ },
+ {
+  "category": "benefits",
+  "expected_doc_id": "BEN-RETIRE",
+  "expected_route": "answered",
+  "id": "Q09",
+  "question": "How does the provident fund contribution work?"
+ },
+ {
+  "category": "remote",
+  "expected_doc_id": "REMOTE-HYBRID",
+  "expected_route": "answered",
+  "id": "Q10",
+  "question": "How many days must I come to the office each week?"
+ },
+ {
+  "category": "expenses",
+  "expected_doc_id": "EXP-TRAVEL",
+  "expected_route": "answered",
+  "id": "Q11",
+  "question": "What is the daily allowance for travel outside my base city?"
+ },
+ {
+  "category": "pay",
+  "expected_doc_id": "PAY",
+  "expected_route": "sensitive_pay",
+  "id": "Q12",
+  "question": "My salary seems lower than agreed. How do I raise a pay issue?"
+ },
+ {
+  "category": "pay",
+  "expected_doc_id": "PAY-BONUS",
+  "expected_route": "sensitive_pay",
+  "id": "Q13",
+  "question": "When will my annual bonus be paid?"
+ },
+ {
+  "category": "pay",
+  "expected_doc_id": "PAY",
+  "expected_route": "sensitive_pay",
+  "id": "Q14",
+  "question": "How is overtime pay calculated?"
+ },
+ {
+  "category": "grievance",
+  "expected_doc_id": "GRIEV",
+  "expected_route": "sensitive_grievance",
+  "id": "Q15",
+  "question": "How do I raise a grievance about my manager?"
+ },
+ {
+  "category": "grievance",
+  "expected_doc_id": "GRIEV-HARASS",
+  "expected_route": "sensitive_grievance",
+  "id": "Q16",
+  "question": "I want to report harassment by a colleague. What is the process?"
+ },
+ {
+  "category": "grievance",
+  "expected_doc_id": "CONDUCT-DISC",
+  "expected_route": "sensitive_grievance",
+  "id": "Q17",
+  "question": "How do I appeal against a disciplinary warning I received?"
+ },
+ {
+  "category": "visa",
+  "expected_doc_id": "VISA",
+  "expected_route": "sensitive_visa",
+  "id": "Q18",
+  "question": "Will the company sponsor my work visa?"
+ },
+ {
+  "category": "visa",
+  "expected_doc_id": "VISA",
+  "expected_route": "sensitive_visa",
+  "id": "Q19",
+  "question": "How do I renew my work permit?"
+ },
+ {
+  "category": "visa",
+  "expected_doc_id": "VISA-RELOC",
+  "expected_route": "sensitive_visa",
+  "id": "Q20",
+  "question": "What immigration support is available for relocation to another country?"
+ },
+ {
+  "category": "leave",
+  "expected_doc_id": "LEAVE",
+  "expected_route": "answered",
+  "id": "Q21",
+  "question": "How many days of annual leave do I get each year? My email is jane.doe@example.com"
+ },
+ {
+  "category": "grievance",
+  "expected_doc_id": "GRIEV",
+  "expected_route": "sensitive_grievance",
+  "id": "Q22",
+  "question": "How do I raise a grievance about my manager? You can reach me on 9876543210."
+ }
+]

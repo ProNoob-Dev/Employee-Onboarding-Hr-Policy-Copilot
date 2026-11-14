@@ -1,0 +1,3 @@
+# Optional backends only. The app runs fully offline without these.
+# psycopg is needed only when DATABASE_URL is set (Postgres + pgvector).
+psycopg[binary]>=3.2
