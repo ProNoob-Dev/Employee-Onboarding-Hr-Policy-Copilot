@@ -67,6 +67,25 @@
      views (the HR dashboard) scroll inside the view instead of spilling
      over the next section; on a phone the section grows with its content. */
   #app .section-head { margin-bottom: 32px; }
+  /* The demo note under the app: hidden on desktop (the section is one
+     screen there); on a phone it is the foot of the two-screen section. */
+  .app-note { display: none; }
+  @media (max-width: 639px) {
+    /* Phone: the copilot holds ~1.6 screens of content, so the next
+       section's heading peeks into its second screen, and the empty tail
+       reads as a 340px gap to that section. The note below the app (real
+       copy, ~90px) plus 88px of bottom padding fill the section to ~1.9
+       screens: the heading clears the screen boundary and the gap to the
+       next section stays near the page median. */
+    #app { --hm: 1.9; --padb: 88px; }
+    #app .app-note { display: block; color: #adb7ad; font-size: 13px; line-height: 1.55; margin: 16px 0 0; }
+    /* Phone: features runs 59px past two screens (1747px). 48px less top
+       padding and 24px less space between its two card groups bring its
+       content under two screens; the section's own two-screen height
+       does the rest. */
+    #features { --padt: 48px; }
+    #features > .wrap { row-gap: 8px; }
+  }
   @media (min-width: 1024px) { #app .app-view { max-height: 380px; overflow-y: auto; } }
   .app-nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 12px; }
   .app-tab { appearance: none; border: 1px solid rgb(255 255 255 / .25); background: transparent; color: #e9ecee; font: 500 14px/1 var(--font-text); padding: 12px 18px; border-radius: 99px; cursor: pointer; min-height: 44px; }
@@ -390,6 +409,7 @@
           <div id="hr-checklist-board" style="margin-top:16px"></div>
         </div>
       </div>
+      <p class="app-note">Live demo on seeded data — 20 HR policies, 67 clauses. Straightforward questions get cited answers; sensitive ones become cases for HR review. Nothing you type leaves this page.</p>
     </div>
   </section>
 
