@@ -1,5 +1,16 @@
 # Client Employee Onboarding & HR Policy Copilot
 
+[![CI](https://github.com/ProNoob-Dev/Employee-Onboarding-Hr-Policy-Copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/ProNoob-Dev/Employee-Onboarding-Hr-Policy-Copilot/actions/workflows/ci.yml)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+![HR Policy Copilot — HR answers with the clause cited.](docs/hero.png)
+
+Ask a leave, benefits or payroll question — get the answer with the exact
+policy clause it came from. Sensitive questions (pay, grievance, visa) never
+get an auto-answer: they go to HR with a draft reply already written. New
+joiners get a personalised Day 1–5 checklist built from the same policies.
+
 > **This is an invented demo / reference project. It is NOT real client work.**
 > There is no real client, no real employees, and no real HR policy data.
 > All policy documents, employee names, questions, and answers are synthetic,
@@ -7,6 +18,15 @@
 > (88% autonomous, 40% faster, 25% less effort) are invented claims, **not**
 > measured results — this repo reports only measured numbers from its own
 > golden eval set (see [Eval](#eval)).
+
+## Watch it work
+
+![Recorded demo — the live app answering a leave question, building a checklist, and showing the HR review queue](docs/demo.gif)
+
+A real screen recording of the app running against the local API — a cited
+leave answer, a Day 1–5 checklist for a Data Engineer in Pune, and the HR
+review queue with CASE-0001. Full video (19s, with music):
+[`docs/demo.mp4`](docs/demo.mp4).
 
 One FastAPI + LangGraph copilot that answers HR questions grounded in a cited
 policy clause, builds a personalised first-week checklist for a new joiner,
