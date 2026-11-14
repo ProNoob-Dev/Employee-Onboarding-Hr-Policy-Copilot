@@ -25,6 +25,77 @@ routing decision, and review is written to a JSONL audit trail.
 | `GET /metrics` | Measured counts: answered, routed, autonomous rate, citation coverage, avg confidence |
 | `GET /health` | `{"status": "ok", "llm_provider": "local", "retrieval": "tfidf"}` |
 
+## How it works — step by step
+
+![How a question becomes a cited answer](docs/pipeline.gif)
+
+Six steps, one request. Every output below is a real response from the
+running API (local mode, no Azure key) — not a mock.
+
+**Step 1 — Question in.** An employee asks in plain language:
+
+```bash
+curl -X POST localhost:8000/ask -d '{"question": "How many days of annual leave do I get?"}'
+```
+
+**Step 2 — Retrieval.** TF-IDF over the 67 synthetic clauses (pgvector when
+`DATABASE_URL` is set) returns the top 3: `LEAVE-01`, `LEAVE-03`, `LEAVE-04`.
+
+**Step 3 — Supervisor (LangGraph).** The supervisor routes the request —
+`answered` here, confidence `0.41`. A sensitive or low-confidence question
+never reaches this step's answer path.
+
+**Step 4 — HITL gate.** Pay, grievance and visa questions are routed to HR
+with a draft reply already written, and no substantive answer is given:
+
+```json
+{"route": "routed_to_hr", "route_reason": "sensitive_pay",
+ "case_id": "CASE-0001", "message": "This question has been routed to HR with a draft reply. An HR reviewer will respond."}
+```
+
+The case sits in `GET /cases` as `pending_review` until a human approves or
+rejects it (`POST /cases/{id}/review`; a reviewed case cannot be reviewed
+again — 409).
+
+**Step 5 — Cited answer.** The answer quotes the exact clause it came from:
+
+```json
+{"route": "answered", "confidence": 0.409,
+ "answer": "According to Leave Policy (LEAVE, clause LEAVE-01): Every full-time employee gets 24 days of annual leave per calendar year...",
+ "citations": [{"doc_id": "LEAVE", "clause_id": "LEAVE-01", "title": "Leave Policy",
+   "quote": "Every full-time employee gets 24 days of annual leave per calendar year, credited at the start of the year."}]}
+```
+
+**Step 6 — Checklist.** The onboarding agent builds a Day 1–5 checklist from
+the `ONB-*` clauses, per role and location:
+
+```bash
+curl -X POST localhost:8000/onboarding/EMP-101/checklist \
+  -d '{"role": "Data Engineer", "location": "Pune", "start_date": "2026-11-17"}'
+# → 8 items: "Complete HR paperwork" (ONB-01), "Collect office badge and desk" (ONB-01),
+#   "Collect laptop and logins" (ONB-IT-01), ...
+```
+
+Every step writes to the JSONL audit trail, and `GET /metrics` reports the
+measured counts (`answered`, `routed_to_hr`, `autonomous_rate`,
+`citation_coverage`, `avg_confidence`).
+
+Verified end to end on 2026-11-14:
+
+```text
+$ python scripts/eval.py
+eval: recall@3=1.0 citation=1.0 routing=1.0 pii_leaks=0 autonomous_rate=0.545 avg_latency_ms=6.1
+GATES PASSED
+
+$ pytest -q
+72 passed in 2.09s
+```
+
+Note on the stack: this repo uses **LangGraph alone** — no LangChain, no
+RAGAS/DeepEval (the eval is a deterministic exact-match scorer over the
+22-question golden set), and no Langfuse/OpenTelemetry vendor calls. See
+[What is deliberately not built](#what-is-deliberately-not-built).
+
 ## Setup
 
 ```bash
